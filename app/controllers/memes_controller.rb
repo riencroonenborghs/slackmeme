@@ -1,42 +1,22 @@
 class MemesController < ApplicationController
+  # token=ZX1VbztRNTpBfEiLk5XyMY9B
+  # team_id=T0001
+  # channel_id=C2147483705
+  # channel_name=test
+  # timestamp=1355517523.000005
+  # user_id=U2147483697
+  # user_name=Steve
+  # text=googlebot: What is the air-speed velocity of an unladen swallow?
+  # trigger_word=googlebot:
+
   def generate
-    meme = match_memes(params[:message])
-    return nil unless meme
+    message = params[:message]
+    service = ::MemeGenerator.new(message)
 
-    response = Unirest.post "https://api.imgflip.com/caption_image",
-       parameters:
-       {
-          "username" => ENV['IMGFLIP_USERNAME'],
-          "password" => ENV['IMGFLIP_PASSWORD'],
-          "template_id" => meme[:id], 
-          "text0" => meme[:top], 
-          "text1" => meme[:bottom]
-      }
-     
-    image_url = response.body['data']['url']
-    render json: { image_url: image_url }.to_json
-  end
-
-  def match_memes(message)
-    case message.downcase
-    when /^(one does not simply)(.*)/
-      return { id: 61579, top: $1, bottom: $2.strip! }
-    when /^(what if i told you)(.*)/
-      return { id: 100947, top: $1, bottom: $2.strip! }
-    when /^(brace yourselves)(.*)/
-      return { id: 61546, top: $1, bottom: $2.strip! }
-    when /^(.*)(but that(?:')?s none of my business)/
-      return { id: 16464531, top: $1.strip!, bottom: $2 }
-    when /^(.*)((all the)(.*))/
-      return { id: 61533, top: $1.strip!, bottom: $2 }
-    when /^(.*)(ain(?:')?t nobody got time for that)/
-      return { id: 442575, top: $1.strip!, bottom: $2 }
-    when /^(.*)(we(?:')?re dealing with a badass over here)/
-      return { id: 11074754, top: $1.strip!, bottom: $2 }
-    when /^(.*?)((a)+nd it(?:')?s gone)\z/
-      return { id: 766986, top: $1.strip!, bottom: $2 }
+    if service.valid?
+      render json: {foo: :bar}.to_json
     else
-      return nil
+      render nothing: true
     end
   end
 end
