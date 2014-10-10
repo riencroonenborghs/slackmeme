@@ -1,5 +1,9 @@
 # SlackMeme
 
+## Credits
+
+Got the idea from this post: [How to Build a Meme Generator Using Twilio MMS, Imgflip and Sinatra](https://www.twilio.com/blog/2014/10/how-to-build-a-meme-generator-using-twilio-mms-imgflip-and-sinatra.html?utm_source=rubyweekly&utm_medium=email).
+
 ## Set up
 
 ### Server
