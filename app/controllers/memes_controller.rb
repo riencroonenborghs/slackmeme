@@ -1,4 +1,5 @@
 # curl -X POST http://localhost:3000 -d 'message=one does not simply foo abar'
+# curl -X POST http://slackmeme.croonenborghs.net -d 'message=one does not simply foo abar'
 
 class MemesController < ApplicationController
   # token=ZX1VbztRNTpBfEiLk5XyMY9B
@@ -18,9 +19,9 @@ class MemesController < ApplicationController
     if service.valid?
       hash = service.generate!
       SlackWriter.push!(hash[:image_url])
-      render nothing: true
+      render json: hash.to_json
     else
-      render nothing: true
+      render json: {error: 'not valid'}.to_json
     end
   end
 end
