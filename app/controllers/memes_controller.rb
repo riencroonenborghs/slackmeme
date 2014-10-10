@@ -13,7 +13,12 @@ class MemesController < ApplicationController
   # trigger_word=googlebot:
 
   def generate
-    message = params[:message]
+    if params[:trigger_word] != ENV['SLACK_INCOMING_TRIGGER_WORD']
+      render json: {error: 'invalid trigger_word'}.to_json
+      return
+    end
+
+    message = params[:text]
     service = ::MemeGenerator.new(message)
 
     if service.valid?
@@ -21,7 +26,7 @@ class MemesController < ApplicationController
       SlackWriter.push!(hash[:image_url])
       render json: hash.to_json
     else
-      render json: {error: 'not valid'}.to_json
+      render json: {error: 'meme invalid'}.to_json
     end
   end
 end

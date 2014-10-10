@@ -22,10 +22,11 @@ IMGFLIP_PASSWORD=itsasecret
 
 ### Slack
 
-Go to your slack account and set up an outgoing webhook, and have it point to your server. Also set up an incoming webhook for the channel you want. Put the incoming wehbook URL and channel in your .env
+Go to your Slack account and set up an outgoing webhook, and have it point to your server. Use a trigger word. Also set up an incoming webhook for the channel you want. Put the incoming webhook URL, trigger word and channel in your .env
 
 ```
 SLACK_INCOMING_HOOK=slackurl
+SLACK_INCOMING_TRIGGER_WORD=slackmeme:
 SLACK_CHANNEL=channel
 ```
 
