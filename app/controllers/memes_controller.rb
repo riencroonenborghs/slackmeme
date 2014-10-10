@@ -18,7 +18,7 @@ class MemesController < ApplicationController
       return
     end
 
-    message = params[:text]
+    message = params[:text].gsub(/^#{ENV['SLACK_INCOMING_TRIGGER_WORD']} /,'')
     service = ::MemeGenerator.new(message)
 
     if service.valid?
