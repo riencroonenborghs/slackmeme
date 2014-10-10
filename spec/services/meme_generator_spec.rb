@@ -60,9 +60,9 @@ describe MemeGenerator do
     it "should return hash" do
       hash = MemeGenerator.new(nil).send(:match_memes, message)
       expect(hash.class).to eq Hash
-      expect(hash[:id]).to_not eq nil
-      expect(hash[:top]).to_not eq nil
-      expect(hash[:bottom]).to_not eq nil
+      expect(hash[:id]).to eq 61533
+      expect(hash[:top]).to eq 'meme'
+      expect(hash[:bottom]).to eq 'all the memes'
     end
   end
 
