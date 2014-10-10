@@ -30,6 +30,8 @@ class MemeGenerator
 private
   
   def match_memes(message)
+    return nil if message.nil?
+
     case message.downcase
     when /^(one does not simply)(.*)/
       return { id: 61579, top: $1, bottom: $2.strip! }
