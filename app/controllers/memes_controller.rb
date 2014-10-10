@@ -1,3 +1,5 @@
+# curl -X POST http://localhost:3000 -d 'message=one does not simply foo abar'
+
 class MemesController < ApplicationController
   # token=ZX1VbztRNTpBfEiLk5XyMY9B
   # team_id=T0001
@@ -14,7 +16,9 @@ class MemesController < ApplicationController
     service = ::MemeGenerator.new(message)
 
     if service.valid?
-      render json: {foo: :bar}.to_json
+      hash = service.generate!
+      SlackWriter.push!(hash[:image_url])
+      render nothing: true
     else
       render nothing: true
     end
