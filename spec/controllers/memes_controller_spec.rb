@@ -27,4 +27,15 @@ describe MemesController, type: :controller do
     end
   end
 
+  context 'GET #list' do
+    it 'should be success' do
+      get :list
+      expect(response).to be_success
+    end
+    it 'should render' do
+      get :list
+      expect(response).to render_template(:list)
+    end
+  end
+
 end

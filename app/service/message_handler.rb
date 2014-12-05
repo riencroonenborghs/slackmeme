@@ -20,16 +20,14 @@ private
   end
 
   def handle_list
-    names = MemeGenerator::MEMES.map{|x| x[:name]}
-    SlackWriter.push!(names.join('\n'))
-    {memes: names}
+    SlackWriter.push!('http://slackmeme.croonenborghs.net/list')
   end
 
   def handle_meme
-    generator = ::MemeGenerator.new(parsed_message)
+    generator = ::ImgFlip::Generator.new(parsed_message)
     if generator.valid?
       hash = generator.generate!
-      SlackWriter.push!(hash[:image_url])      
+      SlackWriter.push!(hash[:image_url])
       hash
     else
       {error: 'invalid meme'}

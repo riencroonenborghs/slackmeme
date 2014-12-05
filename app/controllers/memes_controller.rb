@@ -10,4 +10,8 @@ class MemesController < ApplicationController
 
     render json: response.to_json
   end
+
+  def list
+    @memes = MEME_DATABASE.memes
+  end
 end
