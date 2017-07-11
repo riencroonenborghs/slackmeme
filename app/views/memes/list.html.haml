@@ -1,9 +1,42 @@
+:css
+  .list .cell { 
+    width: 250px; height: 250px; float: left; word-wrap: normal; margin: 4px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .list .cell h3, .list .cell .bottom { 
+    color: white; text-align: center; padding: 0px; margin: 0px; 
+  }
+  .list .cell h3 {
+    background: black;
+    background: -webkit-linear-gradient(black, darkgray);
+    background: -o-linear-gradient(black, darkgray);
+    background: -moz-linear-gradient(black, darkgray);
+    background: linear-gradient(black, darkgray);
+  }
+  .list .cell .bottom {
+    background: darkgray;
+    background: -webkit-linear-gradient(darkgray, black);
+    background: -o-linear-gradient(darkgray, black);
+    background: -moz-linear-gradient(darkgray, black);
+    background: linear-gradient(darkgray, black);    
+  }
+  .list .cell .bottom pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
+
 %h1
   List
 
--@memes.each do |meme|
-  %p
-    =meme.name
-    =link_to 'template', meme.template_url
-    %pre
-      slackmeme: #{meme.name}|line1|line2
+.list
+  -@memes.each do |meme|
+    .cell{style: "background: url(#{meme.template_url}); background-size: 260px 260px;"}
+      %h3=meme.name
+      .bottom
+        %pre
+          slackmeme: #{meme.name}|line1|line2

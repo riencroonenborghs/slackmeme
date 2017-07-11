@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.6'
+ruby "2.3.3"
+
+gem 'rails', '5'
 gem 'dotenv-rails'
 gem 'unirest'
 gem 'haml'
